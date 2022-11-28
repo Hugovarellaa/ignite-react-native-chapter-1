@@ -1,27 +1,40 @@
-import { FlatList, StatusBar, Text, TextInput, View } from 'react-native'
+import { useState } from 'react'
+import { Alert, FlatList, StatusBar, Text, TextInput, View } from 'react-native'
 import { Button } from '../../components/Button'
 import { Participant } from '../../components/Participant'
 import { homeStyles } from './styles'
 
 export function Home() {
-  const participants = [
-    'Hugo',
-    'Rodrigo',
-    'Diego',
-    'Biro',
-    'Fulano',
-    'Mayk',
-    'Jack',
-    'João',
-    'Maria',
-    'Ana',
-  ]
+  const [participants, setParticipants] = useState<string[]>([])
+  const [newParticipants, setNewParticipants] = useState('')
 
   function handleAddParticipant() {
-    console.log('Adicionando a participant')
+    if (participants.includes(newParticipants)) {
+      setNewParticipants('')
+      return Alert.alert('Opa!', 'Esse participante ja está cadastrado!')
+    }
+    if (newParticipants === '') {
+      setNewParticipants('')
+      return Alert.alert('Opa!', 'Digite um nome valido!')
+    }
+    setParticipants((oldState) => [...oldState, newParticipants])
+    setNewParticipants('')
   }
-  function handleRemoveParticipant() {
-    console.log('Removendo a participant')
+
+  function handleRemoveParticipant(name: string) {
+    const newParticipants = [...participants]
+    newParticipants.splice(newParticipants.indexOf(name), 1)
+
+    return Alert.alert('Remover', `Remover o participante ${name}?`, [
+      {
+        text: 'OK',
+        onPress: () => setParticipants(newParticipants),
+      },
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+    ])
   }
 
   return (
@@ -39,6 +52,8 @@ export function Home() {
           style={homeStyles.input}
           placeholder="Nome do participante"
           placeholderTextColor="#6b6b6b"
+          onChangeText={setNewParticipants}
+          value={newParticipants}
         />
         <Button title="+" type="ADD" onPress={handleAddParticipant} />
       </View>
@@ -56,7 +71,7 @@ export function Home() {
           <Participant
             key={item}
             name={item}
-            onRemove={handleRemoveParticipant}
+            onRemove={() => handleRemoveParticipant(item)}
           />
         )}
       />
