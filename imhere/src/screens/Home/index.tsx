@@ -1,26 +1,18 @@
+import { useState } from 'react'
 import { FlatList, StatusBar, Text, TextInput, View } from 'react-native'
 import { Button } from '../../components/Button'
 import { Participant } from '../../components/Participant'
 import { homeStyles } from './styles'
 
 export function Home() {
-  const participants = [
-    'Hugo',
-    'Rodrigo',
-    'Diego',
-    'Biro',
-    'Fulano',
-    'Mayk',
-    'Jack',
-    'João',
-    'Maria',
-    'Ana',
-  ]
+  const [participants, setParticipants] = useState(['Hugo'])
+  const [newParticipants, setNewParticipants] = useState('')
 
   function handleAddParticipant() {
-    console.log('Adicionando a participant')
+    setParticipants((oldState) => [...oldState, newParticipants])
+    setNewParticipants('')
   }
-  function handleRemoveParticipant() {
+  function handleRemoveParticipant(name: string) {
     console.log('Removendo a participant')
   }
 
@@ -39,6 +31,8 @@ export function Home() {
           style={homeStyles.input}
           placeholder="Nome do participante"
           placeholderTextColor="#6b6b6b"
+          onChangeText={setNewParticipants}
+          value={newParticipants}
         />
         <Button title="+" type="ADD" onPress={handleAddParticipant} />
       </View>
@@ -56,7 +50,7 @@ export function Home() {
           <Participant
             key={item}
             name={item}
-            onRemove={handleRemoveParticipant}
+            onRemove={() => handleRemoveParticipant(item)}
           />
         )}
       />
