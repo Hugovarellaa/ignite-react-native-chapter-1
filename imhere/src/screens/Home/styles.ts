@@ -33,4 +33,12 @@ export const homeStyles = StyleSheet.create({
     marginTop: 36,
     marginBottom: 42,
   },
+  listEmpty: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    color: '#FFF',
+    fontSize: 16,
+    textAlign: 'center',
+  },
 })

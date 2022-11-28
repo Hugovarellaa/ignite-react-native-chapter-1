@@ -47,6 +47,11 @@ export function Home() {
         showsVerticalScrollIndicator={false}
         data={participants}
         keyExtractor={(item) => item}
+        ListEmptyComponent={() => (
+          <Text style={homeStyles.listEmpty}>
+            Ninguém chegou no evento ainda? Adicione participantes da sua lista
+          </Text>
+        )}
         renderItem={({ item }) => (
           <Participant
             key={item}
