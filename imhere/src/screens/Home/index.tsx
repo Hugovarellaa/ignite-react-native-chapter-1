@@ -1,4 +1,4 @@
-import { ScrollView, StatusBar, Text, TextInput, View } from 'react-native'
+import { FlatList, StatusBar, Text, TextInput, View } from 'react-native'
 import { Button } from '../../components/Button'
 import { Participant } from '../../components/Participant'
 import { homeStyles } from './styles'
@@ -43,15 +43,18 @@ export function Home() {
         <Button title="+" type="ADD" onPress={handleAddParticipant} />
       </View>
 
-      <ScrollView>
-        {participants.map((participant) => (
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        data={participants}
+        keyExtractor={(item) => item}
+        renderItem={({ item }) => (
           <Participant
-            key={participant}
-            name={participant}
+            key={item}
+            name={item}
             onRemove={handleRemoveParticipant}
           />
-        ))}
-      </ScrollView>
+        )}
+      />
     </View>
   )
 }
