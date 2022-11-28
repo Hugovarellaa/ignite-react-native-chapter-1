@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { FlatList, StatusBar, Text, TextInput, View } from 'react-native'
+import { Alert, FlatList, StatusBar, Text, TextInput, View } from 'react-native'
 import { Button } from '../../components/Button'
 import { Participant } from '../../components/Participant'
 import { homeStyles } from './styles'
@@ -9,11 +9,16 @@ export function Home() {
   const [newParticipants, setNewParticipants] = useState('')
 
   function handleAddParticipant() {
+    if (participants.includes(newParticipants)) {
+      Alert.alert('Opa!', 'Esse participante ja está cadastrado!')
+    }
     setParticipants((oldState) => [...oldState, newParticipants])
     setNewParticipants('')
   }
   function handleRemoveParticipant(name: string) {
-    console.log('Removendo a participant')
+    const newParticipants = [...participants]
+    newParticipants.splice(newParticipants.indexOf(name), 1)
+    setParticipants(newParticipants)
   }
 
   return (
