@@ -19,10 +19,10 @@ export function Home() {
         <Button title="+" type="ADD" />
       </View>
 
-      <Participant />
-      <Participant />
-      <Participant />
-      <Participant />
+      <Participant name="Hugo Varella" />
+      <Participant name="Fulano" />
+      <Participant name="Siglano" />
+      <Participant name="Jhon Doe" />
     </View>
   )
 }
