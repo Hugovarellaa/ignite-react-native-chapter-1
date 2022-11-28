@@ -1,9 +1,22 @@
-import { StatusBar, Text, TextInput, View } from 'react-native'
+import { ScrollView, StatusBar, Text, TextInput, View } from 'react-native'
 import { Button } from '../../components/Button'
 import { Participant } from '../../components/Participant'
 import { homeStyles } from './styles'
 
 export function Home() {
+  const participants = [
+    'Hugo',
+    'Rodrigo',
+    'Diego',
+    'Biro',
+    'Fulano',
+    'Mayk',
+    'Jack',
+    'João',
+    'Maria',
+    'Ana',
+  ]
+
   function handleAddParticipant() {
     console.log('Adicionando a participant')
   }
@@ -13,7 +26,11 @@ export function Home() {
 
   return (
     <View style={homeStyles.container}>
-      <StatusBar translucent backgroundColor="transparent" barStyle="light-content" />
+      <StatusBar
+        translucent
+        backgroundColor="transparent"
+        barStyle="light-content"
+      />
       <Text style={homeStyles.eventName}>Nome do Evento</Text>
       <Text style={homeStyles.eventDate}>Segunda, 28 de Novembro de 2022</Text>
 
@@ -26,10 +43,15 @@ export function Home() {
         <Button title="+" type="ADD" onPress={handleAddParticipant} />
       </View>
 
-      <Participant name="Hugo Varella" onRemove={handleRemoveParticipant} />
-      <Participant name="Fulano" onRemove={handleRemoveParticipant} />
-      <Participant name="Siglano" onRemove={handleRemoveParticipant} />
-      <Participant name="Jhon Doe" onRemove={handleRemoveParticipant} />
+      <ScrollView>
+        {participants.map((participant) => (
+          <Participant
+            key={participant}
+            name={participant}
+            onRemove={handleRemoveParticipant}
+          />
+        ))}
+      </ScrollView>
     </View>
   )
 }
