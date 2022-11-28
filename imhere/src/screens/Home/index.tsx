@@ -5,20 +5,36 @@ import { Participant } from '../../components/Participant'
 import { homeStyles } from './styles'
 
 export function Home() {
-  const [participants, setParticipants] = useState(['Hugo'])
+  const [participants, setParticipants] = useState<string[]>([])
   const [newParticipants, setNewParticipants] = useState('')
 
   function handleAddParticipant() {
     if (participants.includes(newParticipants)) {
-      Alert.alert('Opa!', 'Esse participante ja está cadastrado!')
+      setNewParticipants('')
+      return Alert.alert('Opa!', 'Esse participante ja está cadastrado!')
+    }
+    if (newParticipants === '') {
+      setNewParticipants('')
+      return Alert.alert('Opa!', 'Digite um nome valido!')
     }
     setParticipants((oldState) => [...oldState, newParticipants])
     setNewParticipants('')
   }
+
   function handleRemoveParticipant(name: string) {
     const newParticipants = [...participants]
     newParticipants.splice(newParticipants.indexOf(name), 1)
-    setParticipants(newParticipants)
+
+    return Alert.alert('Remover', `Remover o participante ${name}?`, [
+      {
+        text: 'OK',
+        onPress: () => setParticipants(newParticipants),
+      },
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+    ])
   }
 
   return (
