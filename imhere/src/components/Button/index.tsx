@@ -6,9 +6,12 @@ interface ButtonProps extends TouchableOpacityProps {
   type: 'ADD' | 'DELETE'
 }
 
-export function Button({ title, type }: ButtonProps) {
+export function Button({ title, type, ...rest }: ButtonProps) {
   return (
-    <TouchableOpacity style={type === 'ADD' ? buttonStyles.buttonAdd : buttonStyles.buttonDelete}>
+    <TouchableOpacity
+      style={type === 'ADD' ? buttonStyles.buttonAdd : buttonStyles.buttonDelete}
+      {...rest}
+    >
       <Text style={buttonStyles.textButton}>{title}</Text>
     </TouchableOpacity>
   )
