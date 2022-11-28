@@ -1,13 +1,14 @@
-import { Text, TouchableOpacity } from 'react-native'
+import { Text, TouchableOpacity, TouchableOpacityProps } from 'react-native'
 import { buttonStyles } from './styles'
 
-interface ButtonProps {
+interface ButtonProps extends TouchableOpacityProps {
   title: string
+  type: 'ADD' | 'DELETE'
 }
 
-export function Button({ title }: ButtonProps) {
+export function Button({ title, type }: ButtonProps) {
   return (
-    <TouchableOpacity style={buttonStyles.button}>
+    <TouchableOpacity style={type === 'ADD' ? buttonStyles.buttonAdd : buttonStyles.buttonDelete}>
       <Text style={buttonStyles.textButton}>{title}</Text>
     </TouchableOpacity>
   )
