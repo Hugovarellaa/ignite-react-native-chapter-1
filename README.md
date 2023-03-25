@@ -3,9 +3,9 @@
 <p align="center">Feito por Hugo Alves Varella</p>
 
 <h1 align="center">
-  <img src="./src/assets/Home.png" width='300px'/>
-  <img src="./src/assets/Typing New.png" width='300px'/>
-  <img src="./src/assets/Confirm Remove.png" width='300px'/>
+  <img src="./src/assets/Home.png" width='200px'/>
+  <img src="./src/assets/Typing New.png" width='200px'/>
+  <img src="./src/assets/Confirm Remove.png" width='200px'/>
 </h1>
 
 <p align="center">
